@@ -22,12 +22,20 @@ CREATE TABLE users (
 , deleted     BOOLEAN DEFAULT FALSE
 );
 
+
 /* System users table, for tracking who logs in/logs out of our system */
 CREATE TABLE user_sessions (
   id          SERIAL PRIMARY KEY
 , user_id     SERIAL REFERENCES users(id)
 , created     TIMESTAMP NOT NULL
-, ended       TIMESTAMP NULL
+, expiration  TIMESTAMP NOT NULL
+, active      BOOLEAN NOT NULL DEFAULT True
+);
+
+/* Preferred Langauges */
+CREATE TABLE languages (
+  id          SERIAL PRIMARY KEY
+, name        VARCHAR(50) UNIQUE NOT NULL
 );
 
 /* Attendee table */
@@ -39,14 +47,32 @@ CREATE TABLE attendees (
 , last_name      VARCHAR(20) 
 , nickname       VARCHAR(20) 
 , age            SMALLINT
+, lang           SERIAL REFERENCES languages(id)
+, mail           BOOLEAN DEFAULT FALSE
+, deceased_date  DATE
 , dob            DATE 
 , deleted        BOOLEAN DEFAULT FALSE
 , created        TIMESTAMP NOT NULL
-, confidential   VARCHAR(2500) NULL
+, status         SERIAL REFERENCES status(id)
+);
+-- alter table attendees add colum
+CREATE TABLE status (
+  id             SERIAL PRIMARY KEY 
+, status_name    VARCHAR(80) UNIQUE NOT NULL;
 );
 
 /* Attendee notes, notes on an attendee */
 CREATE TABLE attendee_notes (
+  id           SERIAL PRIMARY KEY
+, attendee_id  SERIAL REFERENCES attendees(id)
+, created_by   SERIAL REFERENCES users(id)
+, note         VARCHAR(500) 
+, created      TIMESTAMP NOT NULL
+, deleted      BOOLEAN   DEFAULT FALSE
+);
+
+/* Attendee notes, notes on an attendee */
+CREATE TABLE attendee_private_notes (
   id           SERIAL PRIMARY KEY
 , attendee_id  SERIAL REFERENCES attendees(id)
 , created_by   SERIAL REFERENCES users(id)
@@ -98,3 +124,15 @@ CREATE TABLE attendee_needs (
    attendee_id SERIAL UNIQUE REFERENCES attendees(id)
  , need_id     SERIAL UNIQUE REFERENCES needs(id)
 );
+
+/* Needs by attendee */
+CREATE TABLE encounters (
+   id   SERIAL PRIMARY KEY 
+,  attendee_id SERIAL UNIQUE REFERENCES attendees(id)
+,  created      TIMESTAMP NOT NULL
+);
+/* for HUD or HHS */
+CREATE TYPE homeless_status AS ENUM ('HHS', 'HUD');
+
+/* for chronic */
+CREATE TYPE homeless_type AS ENUM ('episodic', 'chronic');
