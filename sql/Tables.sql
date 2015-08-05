@@ -22,6 +22,21 @@ CREATE TABLE users (
 , deleted     BOOLEAN DEFAULT FALSE
 );
 
+/* Mapping of an attendees to file name, tracks uploads  */
+CREATE TABLE attendee_photo (
+  id           SERIAL PRIMARY KEY
+, attendee_id  SERIAL REFERENCES attendees(id)
+, created     TIMESTAMP NOT NULL
+, file_name  VARCHAR(100) NOT NULL
+);
+
+/* Mapping of an attendees to file name, tracks uploads  */
+CREATE TABLE attendee_document (
+  id           SERIAL PRIMARY KEY
+, attendee_id  SERIAL REFERENCES attendees(id)
+, created     TIMESTAMP NOT NULL
+, file_name  VARCHAR(100) NOT NULL
+);
 
 /* System users table, for tracking who logs in/logs out of our system */
 CREATE TABLE user_sessions (
