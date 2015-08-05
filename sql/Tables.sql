@@ -25,12 +25,12 @@ CREATE TABLE users (
 /* Mapping of an attendees to file name, tracks uploads  */
 CREATE TABLE attendee_photo (
   id           SERIAL PRIMARY KEY
-, attendee_id  SERIAL REFERENCES attendees(id)
+, attendee_id  SERIAL UNIQUE REFERENCES attendees(id)
 , created     TIMESTAMP NOT NULL
 , file_name  VARCHAR(100) NOT NULL
 );
 
-/* Mapping of an attendees to file name, tracks uploads  */
+/* Mapping of an attendees to file name, tracks uploads of documents  */
 CREATE TABLE attendee_document (
   id           SERIAL PRIMARY KEY
 , attendee_id  SERIAL REFERENCES attendees(id)
@@ -56,6 +56,7 @@ CREATE TABLE languages (
 /* Attendee table */
 CREATE TABLE attendees (
   id             SERIAL PRIMARY KEY 
+, photo_id       SERIAL REFERENCES attendee_photo(id)
 , email          VARCHAR(80) 
 , first_name     VARCHAR(20) 
 , middle_initial CHAR(1) 
