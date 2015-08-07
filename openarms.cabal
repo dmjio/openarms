@@ -17,6 +17,8 @@ executable web
   build-depends:       aeson == 0.9.*
                      , base == 4.*
                      , bytestring
+                     , clientsession
+                     , cookie
                      , configurator
                      , digestive-functors
                      , either == 4.4.*

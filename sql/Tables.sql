@@ -1,4 +1,4 @@
-DROP TABLE attendees, users, needs, attendee_needs, roles, sessions, attendee_sessions, attendee_notes cascade;
+DROP TABLE attendees, users, needs, attendee_needs, roles, sessions, attendee_sessions, attendee_notes, attendee_documents, attendee_photos, attendee_session_items, encounters, items, languages, status, user_sessions cascade;
 
 /* Plugin for UUIDs */
 CREATE EXTENSION "uuid-ossp";
@@ -7,7 +7,6 @@ CREATE EXTENSION "uuid-ossp";
 CREATE TABLE roles (
   role_name VARCHAR(80) UNIQUE NOT NULL
 );
-
 /* System users table, for logging in/out, new user registration etc */
 CREATE TABLE users (
   id          SERIAL PRIMARY KEY
@@ -22,20 +21,20 @@ CREATE TABLE users (
 , deleted     BOOLEAN DEFAULT FALSE
 );
 
-/* Mapping of an attendees to file name, tracks uploads  */
+/* Mapping of an attendees to file name, tracks uploads, only one photo allowed */
 CREATE TABLE attendee_photo (
   id           SERIAL PRIMARY KEY
 , attendee_id  SERIAL UNIQUE REFERENCES attendees(id)
-, created     TIMESTAMP NOT NULL
-, file_name  VARCHAR(100) NOT NULL
+, created      TIMESTAMP NOT NULL
+, file_name    VARCHAR(100) NOT NULL
 );
 
 /* Mapping of an attendees to file name, tracks uploads of documents  */
 CREATE TABLE attendee_document (
   id           SERIAL PRIMARY KEY
 , attendee_id  SERIAL REFERENCES attendees(id)
-, created     TIMESTAMP NOT NULL
-, file_name  VARCHAR(100) NOT NULL
+, created      TIMESTAMP NOT NULL
+, file_name    VARCHAR(100) NOT NULL
 );
 
 /* System users table, for tracking who logs in/logs out of our system */
@@ -71,12 +70,11 @@ CREATE TABLE attendees (
 , created        TIMESTAMP NOT NULL
 , status         SERIAL REFERENCES status(id)
 );
--- alter table attendees add colum
+/* status */
 CREATE TABLE status (
   id             SERIAL PRIMARY KEY 
-, status_name    VARCHAR(80) UNIQUE NOT NULL;
+, name           VARCHAR(80) UNIQUE NOT NULL;
 );
-
 /* Attendee notes, notes on an attendee */
 CREATE TABLE attendee_notes (
   id           SERIAL PRIMARY KEY
@@ -86,7 +84,6 @@ CREATE TABLE attendee_notes (
 , created      TIMESTAMP NOT NULL
 , deleted      BOOLEAN   DEFAULT FALSE
 );
-
 /* Attendee notes, notes on an attendee */
 CREATE TABLE attendee_private_notes (
   id           SERIAL PRIMARY KEY
@@ -96,14 +93,12 @@ CREATE TABLE attendee_private_notes (
 , created      TIMESTAMP NOT NULL
 , deleted      BOOLEAN   DEFAULT FALSE
 );
-
 /* Session information */
 CREATE TABLE sessions (
   id           SERIAL PRIMARY KEY 
 , session_day  DATE NOT NULL UNIQUE DEFAULT CURRENT_DATE
 , meals_served INT 
 );
-
 /* Tracks the check in/check out session info for a given attendee */
 CREATE TABLE attendee_sessions (
   id          SERIAL PRIMARY KEY 
@@ -113,11 +108,11 @@ CREATE TABLE attendee_sessions (
 , check_out   TIMESTAMP NULL
 , dob         DATE NOT NULL
 );
-
 /* Items to be received by an attendee */
 CREATE TABLE items (
   id        SERIAL PRIMARY KEY 
-, item_name VARCHAR(200) UNIQUE NOT NULL
+, name      VARCHAR(200) UNIQUE NOT NULL
+, special   BOOLEAN DEFAULTS FALSE
 );
 
 /* When an attendee received something */
@@ -125,14 +120,14 @@ CREATE TABLE attendee_session_items (
   id          SERIAL PRIMARY KEY 
 , attendee_id SERIAL REFERENCES attendees(id)
 , session_id  SERIAL REFERENCES sessions(id)
-, item SERIAL REFERENCES items(id)
+, item_id     SERIAL REFERENCES items(id)
 , received    TIMESTAMP
 );
 
 /* Needs to be selected by a user and tracked for an attendee */
 CREATE TABLE needs (
   id   SERIAL PRIMARY KEY 
-, need VARCHAR(200) UNIQUE NOT NULL
+, name VARCHAR(200) UNIQUE NOT NULL
 );
 
 /* Needs by attendee */
@@ -143,8 +138,9 @@ CREATE TABLE attendee_needs (
 
 /* Needs by attendee */
 CREATE TABLE encounters (
-   id   SERIAL PRIMARY KEY 
-,  attendee_id SERIAL UNIQUE REFERENCES attendees(id)
+   id           SERIAL PRIMARY KEY 
+,  attendee_id  SERIAL UNIQUE REFERENCES attendees(id)
+,  session_id   SERIAL UNIQUE REFERENCES sessions(id)
 ,  created      TIMESTAMP NOT NULL
 );
 /* for HUD or HHS */

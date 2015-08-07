@@ -1,16 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
+------------------------------------------------------------------------------
 module OpenArms.Config where
 ------------------------------------------------------------------------------
-import Data.Monoid
-import Data.Configurator
-import Database.PostgreSQL.Simple
+import           Data.Monoid
+import           Data.Configurator
+import           Database.PostgreSQL.Simple
 import qualified Data.ByteString as B
-import Data.ByteString (ByteString)
+import           Data.ByteString (ByteString)
+import           Web.ClientSession
 ------------------------------------------------------------------------------
 data AppConfig = AppConfig {
     pgConn :: Connection
-  , port   :: Integer
-  , key    :: ByteString
+  , port   :: Int
+  , key    :: Key
   } 
 ------------------------------------------------------------------------------
 getAppConfig :: IO AppConfig
@@ -25,5 +27,5 @@ getAppConfig = do
   AppConfig
      <$> connect info
      <*> lookupDefault 8000 config "env.port"
-     <*> pure "foo"
+     <*> getDefaultKey
     
