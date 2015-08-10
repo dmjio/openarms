@@ -83,7 +83,7 @@ newtype LastLogin = LastLogin UTCTime
   deriving (Show, Eq, FromField, ToField, Generic, FromJSON, ToJSON)
 ------------------------------------------------------------------------------
 -- | Login Count
-newtype LoginCount = LoginCount UTCTime
+newtype LoginCount = LoginCount Integer
   deriving (Show, Eq, FromField, ToField, Generic, FromJSON, ToJSON)
 ------------------------------------------------------------------------------
 -- | Register 

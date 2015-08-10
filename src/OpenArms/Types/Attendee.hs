@@ -25,6 +25,7 @@ data Attendee = Attendee {
   , dob       :: Maybe DOB
   , created   :: Created
   , deleted   :: Deleted
+  , status    :: Id
   } deriving (Show, Eq, Generic)
 ------------------------------------------------------------------------------
 instance ToJSON Attendee
@@ -32,6 +33,7 @@ instance FromJSON Attendee
 ------------------------------------------------------------------------------
 instance FromRow Attendee where
   fromRow = Attendee <$> field
+                     <*> field
                      <*> field
                      <*> field
                      <*> field
