@@ -55,7 +55,6 @@ CREATE TABLE languages (
 /* Attendee table */
 CREATE TABLE attendees (
   id             SERIAL PRIMARY KEY 
-, photo_id       SERIAL REFERENCES attendee_photo(id)
 , email          VARCHAR(80) 
 , first_name     VARCHAR(20) 
 , middle_initial CHAR(1) 
@@ -70,11 +69,46 @@ CREATE TABLE attendees (
 , created        TIMESTAMP NOT NULL
 , status         SERIAL REFERENCES status(id)
 );
-/* status */
+
+-- INSERT INTO Attendees
+-- (
+--  email
+-- , first_name
+-- , middle_initial
+-- , last_name     
+-- , nickname      
+-- , age           
+-- , lang          
+-- , mail          
+-- , deceased_date 
+-- , dob           
+-- , deleted       
+-- , created       
+-- , status        
+-- )
+-- VALUES (
+--    'djohnson.m@gmail.com'
+-- ,  'foo'
+-- ,  'a'
+-- ,  'bar'
+-- ,  'foobar'
+-- ,  27
+-- ,  1
+-- ,  true
+-- ,  NULL
+-- ,  '09/16/1987'
+-- ,  false
+-- ,  (select current_date)
+-- , 1
+-- );
+
+
+/* status.. homeless status? */ 
 CREATE TABLE status (
   id             SERIAL PRIMARY KEY 
-, name           VARCHAR(80) UNIQUE NOT NULL;
+, name           VARCHAR(80) UNIQUE NOT NULL
 );
+
 /* Attendee notes, notes on an attendee */
 CREATE TABLE attendee_notes (
   id           SERIAL PRIMARY KEY

@@ -12,6 +12,6 @@ import OpenArms.App
 -- | Main application
 main :: IO ()
 main = do
-  config@AppConfig{ port = port } <- getAppConfig 
+  config@AppConfig{ port = port } <- getConfig 
   putStrLn $ "Running on port " ++ show port ++ "..."
   run port $ logStdout (app config)

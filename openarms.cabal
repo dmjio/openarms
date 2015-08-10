@@ -15,23 +15,24 @@ executable web
   main-is:             Main.hs
   hs-source-dirs:      src
   build-depends:       aeson == 0.9.*
-                     , base == 4.*
+                     , base  == 4.*
                      , bytestring
                      , clientsession
-                     , cookie
                      , configurator
+                     , cookie
                      , digestive-functors
                      , either == 4.4.*
+                     , email-validate
                      , lucid
                      , monad-control
                      , mtl
                      , opaleye
                      , postgresql-simple
                      , scrypt
-                     , email-validate
                      , servant
                      , servant-lucid
                      , servant-server
+                     , split == 0.2.*
                      , text
                      , time == 1.5.*
                      , transformers
