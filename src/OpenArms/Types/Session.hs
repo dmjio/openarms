@@ -2,22 +2,23 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Session
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         Session (..)
+       , columnOffsetsSession
+       , tableOfSession
+       , session
+       , insertSession
+       , insertQuerySession
+       , selectSession
+       , updateSession
+       , fromSqlOfSession
+       , toSqlOfSession
        , id'
-       , name'
+       , sessionDay'
+       , mealsServed'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "session")

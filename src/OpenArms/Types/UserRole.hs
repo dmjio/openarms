@@ -2,22 +2,21 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Role
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
-       , id'
-       , name'
+         UserRole (..)
+         -- * Ops
+       , columnOffsetsUserRole
+       , tableOfUserRole
+       , userRole
+       , insertUserRole
+       , insertQueryUserRole
+       , roleName'
+       , updateUserRole
+       , selectUserRole
+       , fromSqlOfUserRole
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "user_role")

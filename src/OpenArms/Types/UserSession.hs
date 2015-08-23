@@ -2,22 +2,25 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.UserSession 
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         UserSession (..)
+       , columnOffsetsUserSession
+       , tableOfUserSession
+       , userSession
+       , insertUserSession
+       , insertQueryUserSession
+       , selectUserSession
+       , updateUserSession
+       , fromSqlOfUserSession
+       , toSqlOfUserSession
        , id'
-       , name'
+       , userId'
+       , created'
+       , expiration'
+       , active'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "user_session")

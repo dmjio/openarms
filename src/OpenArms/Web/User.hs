@@ -7,18 +7,17 @@ import Servant
 import Servant.Server
 ------------------------------------------------------------------------------
 import OpenArms.Core
-import OpenArms.Types.User
-import OpenArms.Types.Common
+import OpenArms.Types.UserAccount
 ------------------------------------------------------------------------------
-type UserAPI = "user" :> "register" :> ReqBody '[JSON] Register :> Post '[JSON] User
-          :<|> "user" :> "login"    :> ReqBody '[JSON] Login    :> Post '[JSON] User 
+type UserAPI = "user" :> "register" :> ReqBody '[JSON] Int :> Post '[JSON] UserAccount
+          :<|> "user" :> "login"    :> ReqBody '[JSON] Int    :> Post '[JSON] UserAccount 
 ------------------------------------------------------------------------------
 -- | User API
 userAPI :: ServerT UserAPI OpenArms 
 userAPI = register :<|> login 
 ------------------------------------------------------------------------------
 -- | Register API
-register :: Register -> OpenArms User
+register :: a -> OpenArms UserAccount
 register = undefined
   -- 1. Validate email  
   -- 2. Does the user already exist?
@@ -28,5 +27,5 @@ register = undefined
 
 ------------------------------------------------------------------------------
 -- | Login API
-login :: Login -> OpenArms User
+login :: a -> OpenArms UserAccount
 login = undefined

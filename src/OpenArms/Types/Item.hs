@@ -2,22 +2,23 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Item
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         Item (..)
+       , columnOffsetsItem
+       , tableOfItem
+       , item
+       , insertItem
+       , insertQueryItem
+       , selectItem
+       , updateItem
+       , fromSqlOfItem
+       , toSqlOfItem
        , id'
        , name'
+       , special'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "item")

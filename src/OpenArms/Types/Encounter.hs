@@ -2,22 +2,24 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Encounter
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         Encounter (..)
+       , columnOffsetsEncounter
+       , tableOfEncounter
+       , encounter
+       , insertEncounter
+       , insertQueryEncounter
+       , selectEncounter
+       , updateEncounter
+       , fromSqlOfEncounter
+       , toSqlOfEncounter
        , id'
-       , name'
+       , attendeeId'
+       , sessionId'
+       , created'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "encounter")

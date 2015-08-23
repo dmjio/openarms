@@ -14,8 +14,9 @@ cabal-version:       >=1.10
 executable web
   main-is:             Main.hs
   hs-source-dirs:      src
-  build-depends:       aeson == 0.9.*
-                     , base  == 4.*
+  build-depends:       HDBC-postgresql
+                     , aeson
+                     , base
                      , bytestring
                      , clientsession
                      , configurator
@@ -26,17 +27,20 @@ executable web
                      , lucid
                      , monad-control
                      , mtl
+                     , names-th == 0.1.*
                      , opaleye
-                     , postgresql-simple
+                     , persistable-record
+                     , relational-query-HDBC
+                     , relational-record
                      , scrypt
                      , servant
-                     , servant-lucid
                      , servant-server
-                     , split == 0.2.*
+                     , split
+                     , template-haskell == 2.10.*
                      , text
-                     , time == 1.5.*
+                     , time
                      , transformers
-                     , transformers-base == 0.4.*
+                     , transformers-base
                      , wai
                      , wai-extra
                      , warp

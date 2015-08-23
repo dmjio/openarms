@@ -1,52 +1,56 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE TemplateHaskell       #-}
+{-# LANGUAGE FlexibleInstances     #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Attendee where
+module OpenArms.Types.Attendee 
+       ( -- * Types
+         Attendee (..)
+       , columnOffsetsAttendee
+       , tableOfAttendee
+       , attendee
+       , insertAttendee
+       , insertQueryAttendee
+       , selectAttendee
+       , updateAttendee
+       , fromSqlOfAttendee
+       , toSqlOfAttendee
+       , id'
+       , email'
+       , firstName'
+       , middleInitial'
+       , lastName'
+       , nickname'
+       , age'
+       , lang'
+       , mail'
+       , deceasedDate'
+       , dob'
+       , deleted'
+       , created'
+       , status'
+       ) where
 ------------------------------------------------------------------------------
+import OpenArms.Util
 import Data.Aeson
-import Data.Text    (Text)
-import OpenArms.Types.Common
-import GHC.Generics
-import Database.PostgreSQL.Simple.FromRow
-import Database.PostgreSQL.Simple
 ------------------------------------------------------------------------------
-import OpenArms.Config
+$(defineTable "attendee")
 ------------------------------------------------------------------------------
-data Attendee = Attendee {
-    id        :: Id
-  , email     :: Maybe Email
-  , firstName :: Maybe FirstName
-  , middle    :: Maybe MI
-  , lastName  :: Maybe LastName
-  , nickName  :: Maybe NickName
-  , age       :: Maybe Age
-  , lang      :: Integer
-  , mail      :: Bool
-  , deceased  :: Maybe Deceased
-  , dob       :: Maybe DOB
-  , created   :: Created
-  , deleted   :: Deleted
-  , status    :: Id
-  } deriving (Show, Eq, Generic)
-------------------------------------------------------------------------------
-instance ToJSON Attendee
-instance FromJSON Attendee
-------------------------------------------------------------------------------
-instance FromRow Attendee where
-  fromRow = Attendee <$> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-                     <*> field
-------------------------------------------------------------------------------
--- | Get Attendees
---xs :: [(Only (Id 1))] <- query_ pgg "select id from attendees"
-
+instance ToJSON Attendee where
+  toJSON Attendee {..} = object [
+      "id"             .= id
+    , "email"          .= email
+    , "first_name"     .= firstName
+    , "last_name"      .= lastName
+    , "middle_initial" .= middleInitial
+    , "nickname"       .= nickname
+    , "age"            .= age
+    , "lang"           .= lang
+    , "mail"           .= mail
+    , "deceased_date"  .= deceasedDate
+    , "dob"            .= dob
+    , "deleted"        .= deleted
+    , "created"        .= created
+    , "status"         .= status
+    ]

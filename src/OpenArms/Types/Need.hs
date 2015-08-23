@@ -2,22 +2,22 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Need
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         Need (..)
+       , columnOffsetsNeed
+       , tableOfNeed
+       , need
+       , insertNeed
+       , insertQueryNeed
+       , selectNeed
+       , updateNeed
+       , fromSqlOfNeed
+       , toSqlOfNeed
        , id'
        , name'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "need")

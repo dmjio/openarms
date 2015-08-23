@@ -2,22 +2,22 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.AttendeeNeed
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
-       , id'
-       , name'
+         AttendeeNeed (..)
+       , columnOffsetsAttendeeNeed
+       , tableOfAttendeeNeed
+       , attendeeNeed
+       , insertAttendeeNeed
+       , insertQueryAttendeeNeed
+       , selectAttendeeNeed
+       , updateAttendeeNeed
+       , fromSqlOfAttendeeNeed
+       , toSqlOfAttendeeNeed
+       , attendeeId'
+       , needId'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "attendee_need")

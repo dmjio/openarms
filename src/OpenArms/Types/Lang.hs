@@ -2,22 +2,22 @@
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 ------------------------------------------------------------------------------
-module OpenArms.Types.Status 
+module OpenArms.Types.Lang 
        ( -- * Types
-         Status (..)
-       , columnOffsetsStatus
-       , tableOfStatus
-       , status
-       , insertStatus
-       , insertQueryStatus
-       , selectStatus
-       , updateStatus
-       , fromSqlOfStatus
-       , toSqlOfStatus
+         Lang (..)
+       , columnOffsetsLang
+       , tableOfLang
+       , lang
+       , insertLang
+       , insertQueryLang
+       , selectLang
+       , updateLang
+       , fromSqlOfLang
+       , toSqlOfLang
        , id'
        , name'
        ) where
 ------------------------------------------------------------------------------
 import OpenArms.Util
 ------------------------------------------------------------------------------
-$(defineTable "status")
+$(defineTable "lang")
